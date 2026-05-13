@@ -1,26 +1,28 @@
 from fastapi import FastAPI
 
-from multimodal_search.index import SearchIndex
-from multimodal_search.recommender import Recommender
-from multimodal_search.sample_data import sample_catalog
-from multimodal_search.schemas import RecommendationRequest, SearchRequest, SearchResult
+from multimodal_search.schemas import (
+    HealthResponse,
+    RecommendationRequest,
+    RecommendationResponse,
+    SearchRequest,
+    SearchResponse,
+)
+from multimodal_search.service import SearchRecommendationService
 
-app = FastAPI(title='Multimodal Search Recommendation Engine')
-_items = sample_catalog()
-_index = SearchIndex(_items)
-_recommender = Recommender(_items)
-
-
-@app.get('/health')
-def health() -> dict:
-    return {'status': 'ok'}
+app = FastAPI(title='Multimodal Search Recommendation Engine', version='0.2.0')
+_service = SearchRecommendationService()
 
 
-@app.post('/search', response_model=list[SearchResult])
-def search(request: SearchRequest) -> list[SearchResult]:
-    return _index.search(request.query, top_k=request.top_k)
+@app.get('/health', response_model=HealthResponse)
+def health() -> HealthResponse:
+    return _service.health()
 
 
-@app.post('/recommend', response_model=list[SearchResult])
-def recommend(request: RecommendationRequest) -> list[SearchResult]:
-    return _recommender.recommend(request.liked_item_ids, top_k=request.top_k)
+@app.post('/search', response_model=SearchResponse)
+def search(request: SearchRequest) -> SearchResponse:
+    return _service.search(request)
+
+
+@app.post('/recommend', response_model=RecommendationResponse)
+def recommend(request: RecommendationRequest) -> RecommendationResponse:
+    return _service.recommend(request)
