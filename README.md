@@ -1,20 +1,25 @@
 # Multimodal Search Recommendation Engine
 
-Production-ready search and recommendation platform for catalog items with text metadata, image metadata, tagging, similarity search, and personalized recommendations.
+Deployable product discovery service for catalog search and recommendations. It returns ranked results with request IDs, ranking version metadata, latency measurements, and event traces for search quality review.
 
-## Features
+## Core Capabilities
 
-- Catalog item schema with text, tags, category, and image metadata
-- TF-IDF text indexing baseline
-- Similarity search
-- Tag/category-aware recommendations
-- FastAPI search and recommendation API
+- Catalog item schema with text, tags, category, image metadata, tenant, and active status
+- TF-IDF text and metadata search baseline
+- Tag/category affinity recommendation baseline
+- Search request IDs for traceability
+- Recommendation request IDs for traceability
+- Ranking version metadata in every response
+- Latency measurement for search and recommendation calls
+- Result ranking, scores, and explanation reasons
+- JSONL event stream for local search/recommendation analytics
+- FastAPI `/search` and `/recommend` APIs
 - CLI workflows for demo, search, and recommendation
-- JSON search and recommendation examples
+- Runtime configuration through environment variables
 - Docker and Docker Compose deployment
 - GitHub Actions CI
-- Pytest test suite
-- Architecture and deployment documentation
+- Pytest coverage
+- Operations runbook and architecture decision record
 
 ## Quickstart
 
@@ -43,15 +48,25 @@ curl -X POST http://localhost:8000/recommend \
 docker-compose up --build
 ```
 
-## Docs
+## Runtime Configuration
+
+See `.env.example` for environment, ranking version, result limits, and event stream path.
+
+## Documentation
 
 - `ARCHITECTURE.md`
 - `DEPLOYMENT.md`
+- `OPERATIONS.md`
+- `docs/adr-001-search-recommendation-service.md`
 - `sample_query.json`
 - `sample_recommendation.json`
 
-## Portfolio Highlights
+## Production Roadmap
 
-- Demonstrates retrieval, recommendation systems, APIs, and production engineering
-- Useful for ecommerce, media search, product discovery, and personalized content systems
-- Strong foundation for vector databases, embeddings, multimodal encoders, ranking models, personalization, and A/B testing
+- Database-backed catalog ingestion
+- Vector database support
+- Image embeddings with multimodal encoders
+- Personalized user profiles
+- Clickstream feedback loops
+- A/B testing for ranking strategies
+- Search quality and conversion dashboards
