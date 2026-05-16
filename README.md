@@ -1,6 +1,6 @@
 # Multimodal Search Recommendation Engine
 
-Deployable product discovery service for catalog search and recommendations. It returns ranked results with request IDs, ranking version metadata, latency measurements, and event traces for search quality review.
+Deployable product discovery service for catalog search and recommendations. It returns ranked results with request IDs, ranking version metadata, latency measurements, event traces for search quality review, and a premium React discovery operations dashboard.
 
 ## Core Capabilities
 
@@ -20,6 +20,7 @@ Deployable product discovery service for catalog search and recommendations. It 
 - GitHub Actions CI
 - Pytest coverage
 - Operations runbook and architecture decision record
+- Multi-page React/Vite multimodal discovery frontend
 
 ## Quickstart
 
@@ -29,6 +30,31 @@ mmsearch demo
 uvicorn multimodal_search.api:app --reload
 pytest -q
 ```
+
+## Frontend DiscoveryAI Dashboard
+
+The `frontend/` directory contains a premium React/Vite command center for multimodal search, personalized recommendations, ranking quality, and discovery analytics.
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Open `http://localhost:5173`.
+
+Frontend pages:
+
+- Overview: search KPIs, CTR/latency trends, and query modality mix
+- Search Studio: interactive text/hybrid catalog search with ranked results
+- Recommendations: personalized recommendation context and ranked carousel-style results
+- Embedding Explorer: visual similarity-space explorer for catalog items
+- Ranking Controls: ranking weights, metadata filters, and business guardrails
+- Personalization: user affinity profiles and next-best recommendation examples
+- Analytics: CTR lift, conversion insights, and latency performance
+- Evaluation: ranking experiment table with NDCG, recall, CTR lift, and winner flags
+
+The UI attempts to call `/search` and `/recommend` and falls back to demo discovery intelligence when the backend is offline.
 
 ## API
 
