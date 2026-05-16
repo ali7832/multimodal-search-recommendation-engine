@@ -2,6 +2,12 @@
 
 Deployable product discovery service for catalog search and recommendations. It returns ranked results with request IDs, ranking version metadata, latency measurements, event traces for search quality review, and a premium React discovery operations dashboard.
 
+## Product Demo Video
+
+
+https://github.com/user-attachments/assets/08483fe1-80c5-4300-8129-e73429172f7d
+
+
 ## Core Capabilities
 
 - Catalog item schema with text, tags, category, image metadata, tenant, and active status
